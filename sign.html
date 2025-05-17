@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="sign.css">
+    <script src="https://kit.fontawesome.com/26d979510f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="container">
+ <div class="form-box">
+  <h1 id="title">التسجيل</h1>
+  
+  <form>
+    <div class="input-group">
+        <div class="input-field" id="nameField">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" placeholder="الاسم" id="name" required>
+        </div>
+
+        <div class="input-field">
+            <i class="fa-solid fa-id-card"></i>
+            <input type="text" placeholder="الهويه الوطنية" id="nationalId" required>
+        </div>
+
+        <div class="input-field">
+            <i class="fa-solid fa-key"></i>
+            <input type="password" placeholder="الرمز" id="password" required>
+        </div>
+
+        <div class="input-field">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" placeholder="الايميل" id="email" required>
+        </div>
+        
+        <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">تذكرني</label>
+        </div>
+        
+        <p>نسيت الرمز ؟<a href="#">اضغط هنا</a></p>
+    </div>
+    
+    <div class="button-field">
+        <button type="button" id="signUpButton">التسجيل</button>
+        <button type="button" id="signInButton" class="disable">تسجيل الدخول</button>
+    </div>
+  </form>
+ </div>
+</div>
+
+<script>
+    let signUpButton = document.getElementById("signUpButton");
+    let signInButton = document.getElementById("signInButton");
+    let namefield = document.getElementById("nameField");
+    let title = document.getElementById("title");
+    let rememberCheckbox = document.getElementById("remember");
+
+    //اذا ضغط الشخص على زر تذكرني يصير كل ما جا يبغى يسجل دخول يلقا بياناته قدامه
+    window.onload = function() {
+        if(localStorage.getItem('rememberUser') === 'true') {
+            document.getElementById('nationalId').value = localStorage.getItem('savedNationalId') || '';
+            document.getElementById('password').value = localStorage.getItem('savedPassword') || '';
+            document.getElementById('name').value = localStorage.getItem('savedname') || '';
+            document.getElementById('email').value = localStorage.getItem('savedemail') || '';
+
+            rememberCheckbox.checked = true;
+        }
+    };
+
+    // اذا ضغط الشخص على زر تسجيل الدخول يقبل بياناته فيرجعه للصفحة الرئيسية
+    signInButton.onclick = function() {
+        namefield.style.maxHeight = "0";
+        title.innerHTML = "تسجيل الدخول";
+        signUpButton.classList.add("disable");
+        signInButton.classList.remove("disable");
+
+        const nationalId = document.getElementById('nationalId').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        if (!nationalId || !password || !name || !document.getElementById('email').value) {
+            alert("يرجى إدخال الهوية الوطنية والرمز"); // هذا عشان اذا ماعبا البيانات
+            return;
+        }
+
+        // هنا عشان اذا ضغط الشخص على زر تذكرني
+        // يحفظ بياناته 
+        // عشان اذا جا يسجل دخول مره ثانية يلقا بياناته موجودة
+        if (rememberCheckbox.checked) {
+            localStorage.setItem('rememberUser', 'true');
+            localStorage.setItem('savedNationalId', nationalId);
+            localStorage.setItem('savedPassword', password);
+            localStorage.setItem('savedname', name);
+            localStorage.setItem('savedemail', document.getElementById('email').value);
+        } else {
+            localStorage.removeItem('rememberUser');
+            localStorage.removeItem('savedNationalId');
+            localStorage.removeItem('savedPassword');
+            localStorage.removeItem('savedname');
+            localStorage.removeItem('savedemail');
+        }
+
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('username', name);
+        window.location.href = 'Main_Page.html';
+    };
+
+    //نفس الي فوق بس بزر التسجيل
+    // بس هنا يطلب الاسم والهوية الوطنية والرمز
+    signUpButton.onclick = function() {
+        namefield.style.maxHeight = "60px";
+        title.innerHTML = "التسجيل";
+        signUpButton.classList.remove("disable");
+        signInButton.classList.add("disable");
+
+ 
+        const nationalId = document.getElementById('nationalId').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+
+        if (!name || !nationalId || !password) {
+            alert("يرجى تعبئة كل الحقول المطلوبة");
+            return;
+        }
+
+        if (rememberCheckbox.checked) {
+            localStorage.setItem('rememberUser', 'true');
+            localStorage.setItem('savedNationalId', nationalId);
+            localStorage.setItem('savedPassword', password);
+            localStorage.setItem('savedname', name);
+            localStorage.setItem('savedemail', document.getElementById('email').value);
+        } else {
+            localStorage.removeItem('rememberUser');
+            localStorage.removeItem('savedNationalId');
+            localStorage.removeItem('savedPassword');
+            localStorage.removeItem('savedname');
+            localStorage.removeItem('savedemail');
+        }
+
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('username', name);
+        window.location.href = 'Main_Page.html';
+    };
+</script>
+</body>
+</html>

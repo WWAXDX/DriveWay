@@ -1,0 +1,131 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgb(136, 160, 236), rgba(225, 225, 242, 0.8)), url(white.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box {
+    width: 90%;
+    max-width: 450px;
+    background: #fff;
+    padding: 50px 60px 70px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-box h1 {
+    font-size: 30px;
+    margin-bottom: 60px;
+    color: dodgerblue;
+    position: relative;
+}
+
+.form-box h1::after {
+    content: "";
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: dodgerblue;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.input-field {
+    background: #f5f5f5;
+    margin: 15px 0;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+input {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+    font-size: 16px;
+}
+
+.input-field i {
+    margin-left: 15px;
+    color: #777;
+}
+
+form p {
+    text-align: right;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+form a {
+    text-decoration: none;
+    color: dodgerblue;
+}
+
+.button-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+            justify-content: center;
+
+}
+
+.button-field button {
+    flex-basis: 48%;
+    background: dodgerblue;
+    color: #fff;
+    height: 45px;
+    border-radius: 25px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+
+}
+
+.button-field button.disable {
+    background: #eaeaea;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.button-field button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.remember-me input {
+    width: auto;
+    margin-left: 10px;
+}
+
+.remember-me label {
+    color: #555;
+    cursor: pointer;
+}
+

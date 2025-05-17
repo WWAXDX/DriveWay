@@ -1,0 +1,69 @@
+body {
+    background-color: #F7F7F7;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+  }
+  a {
+    text-decoration: none;
+  }
+  
+  .رأس {
+    background-color: #1E90FF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .فلاتر {
+    margin-top: 10px;
+  }
+  
+  .فلتر {
+    background-color: white;
+    color: #1E90FF;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .فلتر:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .محتوى {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+  }
+  
+  .سيارة {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 250px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s;
+  }
+  
+  .سيارة:hover {
+    transform: translateY(-5px);
+  }
+  
+  .سيارة img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 5px;
+  }
+
+
+  
+  

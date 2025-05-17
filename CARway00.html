@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>نموذج تأجير سيارات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(white, #f0f8ff);
+      color: #333;
+      padding: 20px;
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    .rental-box {
+      background-color: #ffffff;
+      border: 1px solid #1E90FF;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 480px;
+      margin: 30px auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      direction: rtl;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #1E90FF;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 14px;
+      margin: 5px 0;
+      display: block;
+      color: #555;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input:focus, select:focus {
+      border-color: #1E90FF;
+      outline: none;
+    }
+
+    button {
+      background-color: #1E90FF;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1c7ed6;
+    }
+
+    #summary {
+      margin-top: 20px;
+      background-color: #f4f8ff;
+      padding: 15px;
+      border: 1px dashed #1E90FF;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    /* تخصيص زر الدفع */
+    .pay-button {
+      background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .pay-button:hover {
+      background-color: #218838;
+    }
+
+  </style>
+</head>
+<body>
+ 
+
+  <div class="rental-box">
+    <h2>نموذج التأجير </h2>
+
+    <label for="car">اختر نوع السيارة:</label>
+    <select id="car">
+      <option value="هونداي كونا">هونداي كونا - 350 ريال/يوم</option>
+      <option value="هونداي النترا">هونداي النترا - 150 ريال/يوم</option>
+      <option value="هونداي سوناتا">هونداي سوناتا - 240 ريال/يوم</option>
+      <option value="جي ام سي تيرين">جي ام سي تيرين - 220 ريال/يوم</option>
+      <option value="جي ام سي يوكن">جي ام سي يوكن - 480 ريال/يوم</option>
+      <option value="شيفرولية تاهو">شيفرولية تاهو - 700 ريال/يوم</option>
+      <option value="شيفرولية سوبربان">شيفرولية سوبربان - 800 ريال/يوم</option>
+      <option value="تويوتا كامري">تويوتا كامري - 250 ريال/يوم</option>
+      <option value="تويوتا يارس">تويوتا يارس - 120 ريال/يوم</option>
+      <option value="شيفرولية السبارك">شيفرولية السبارك - 100 ريال/يوم</option>
+      <option value="فورد اكسبيدشن">فورد اكسبيدشن - 800 ريال/يوم</option>
+      <option value="فورد اكسبلورر">فورد اكسبلورر - 300 ريال/يوم</option>
+      <option value="فورد تورس">فورد تورس - 250 ريال/يوم</option>
+      <option value="مرسيدس G-Class">مرسيدس G-Class - 1800 ريال/يوم</option>
+      <option value="مرسيدس C200">مرسيدس C200 - 560 ريال/يوم</option>
+      <option value="بي ام دبليو i218">بي ام دبليو i218 - 390 ريال/يوم</option>
+      <option value="جينيسس GV70">جينيسس GV70 - 1500 ريال/يوم</option>
+      <option value="جينيسس G80">جينيسس G80 - 680 ريال/يوم</option>
+      <option value="هونداي ازيرا">هونداي ازيرا - 480 ريال/يوم</option>
+      <option value="نيسان بترول">نيسان بترول - 800 ريال/يوم</option>
+      <option value="نيسان كيكس">نيسان كيكس - 170 ريال/يوم</option>
+      <option value="نيسان سنترا">نيسان سنترا - 120 ريال/يوم</option>
+      <option value="شيفرولية ابيكا">شيفرولية ابيكا - 180 ريال/يوم</option>
+      <option value="هيونداي اكسنت">هيونداي اكسنت - 135 ريال/يوم</option>
+      <option value="نيسان صني">نيسان صني - 100 ريال/يوم</option>
+      <option value="لاندكروزر">لاندكروزر - 535 ريال/يوم</option>
+    </select>
+
+    <label for="carCount">عدد السيارات:</label>
+    <input type="number" id="carCount" min="1" value="1">
+
+    <label for="rentalType">نوع التأجير:</label>
+    <select id="rentalType">
+      <option value="day">يومي</option>
+      <option value="month">شهري</option>
+      <option value="year">سنوي</option>
+    </select>
+
+    <label id="durationLabel" for="duration">عدد الأيام:</label>
+    <input type="number" id="duration" min="1" value="1">
+
+    <label for="startDate">تاريخ بدء التأجير:</label>
+    <input type="date" id="startDate">
+
+    <button onclick="calculate()">احسب السعر</button>
+
+    <div id="summary"></div>
+    
+    <!-- هذا الزر ينقلك لصفحةالدفع-->
+    <button class="pay-button" id="goToPayment">انتقل الى صفحة الدفع</button>
+  </div>
+
+  <script>
+    const rentalType = document.getElementById("rentalType");
+    const durationLabel = document.getElementById("durationLabel");
+
+    rentalType.addEventListener("change", () => {
+      switch (rentalType.value) {
+        case "day":
+          durationLabel.textContent = "عدد الأيام:";
+          break;
+        case "month":
+          durationLabel.textContent = "عدد الأشهر:";
+          break;
+        case "year":
+          durationLabel.textContent = "عدد السنوات:";
+          break;
+      }
+      document.getElementById("summary").innerHTML = "";
+    });
+
+    function calculate() {
+      const car = document.getElementById("car").value;
+      const carCount = parseInt(document.getElementById("carCount").value);
+      const type = document.getElementById("rentalType").value;
+      const startDate = new Date(document.getElementById("startDate").value);
+      const duration = parseInt(document.getElementById("duration").value);
+      const summary = document.getElementById("summary");
+
+      if (isNaN(startDate.getTime()) || isNaN(duration) || duration < 1) {
+        summary.innerHTML = "<span class='error'>يرجى تعبئة جميع الحقول بشكل صحيح.</span>";
+        return;
+      }
+
+      const prices = {
+        "هونداي كونا": 350,
+        "هونداي النترا": 150,
+        "هونداي سوناتا": 240,
+        "جي ام سي تيرين": 220,
+        "جي ام سي يوكن": 480,
+        "شيفرولية تاهو": 700,
+        "شيفرولية سوبربان": 800,
+        "تويوتا كامري": 250,
+        "تويوتا يارس": 120,
+        "شيفرولية السبارك": 100,
+        "فورد اكسبيدشن": 800,
+        "فورد اكسبلورر": 300,
+        "فورد تورس": 250,
+        "مرسيدس G-Class": 1800,
+        "مرسيدس C200": 560,
+        "بي ام دبليو i218": 390,
+        "جينيسس GV70": 1500,
+        "جينيسس G80": 680,
+        "هونداي ازيرا": 480,
+        "نيسان بترول": 800,
+        "نيسان كيكس": 170,
+        "نيسان سنترا": 120,
+        "شيفرولية ابيكا": 180,
+        "هيونداي اكسنت": 135,
+        "نيسان صني": 100,
+        "لاندكروزر": 535
+      };
+
+      let pricePerUnit = prices[car];
+
+      if (type === "month") pricePerUnit *= 25;
+      else if (type === "year") pricePerUnit *= 280;
+
+      const total = pricePerUnit * duration * carCount;
+
+      let endDate = new Date(startDate);
+      if (type === "day") endDate.setDate(endDate.getDate() + duration);
+      if (type === "month") endDate.setMonth(endDate.getMonth() + duration);
+      if (type === "year") endDate.setFullYear(endDate.getFullYear() + duration);
+
+      const readableCar = document.getElementById("car").options[document.getElementById("car").selectedIndex].text;
+
+      summary.innerHTML = `
+        <strong>ملخص الحجز:</strong><br>
+        السيارة: ${readableCar}<br>
+        عدد السيارات: ${carCount}<br>
+        المدة: ${duration} ${type === 'day' ? 'يوم' : type === 'month' ? 'شهر' : 'سنة'}<br>
+        تاريخ البداية: ${startDate.toDateString()}<br>
+        تاريخ النهاية: ${endDate.toDateString()}<br>
+        <strong>السعر الإجمالي:</strong> ${total} ريال سعودي
+      `;
+    }
+    // هذا يسوي امر انه اذا ما حسب السعر اول ماينقله لصفحة الدفع
+    document.getElementById("goToPayment").addEventListener("click", function() {
+      const summary = document.getElementById("summary").innerHTML;
+      if (summary) {
+        localStorage.setItem("rentalSummary", summary);
+        window.location.href = "Payment and receipt.html";
+      } else {
+        alert("يرجى حساب السعر أولاً.");
+      }
+    });
+  </script>
+
+</body>
+</html>

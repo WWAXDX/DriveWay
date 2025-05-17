@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الدفع والاستلام</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #F7F7F7;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(60, 60, 60, 0.1);
+      max-width: 900px;
+      width: 100%;
+      padding: 40px;
+      animation: fadeIn 0.6s ease;
+      box-sizing: border-box;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      font-size: 30px;
+      color: #1E90FF;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    label {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+      display: block;
+    }
+    input[type="text"], select {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f5f7fa;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    input[type="text"]:focus {
+      border: 2px solid #1E90FF;
+      background: #fff;
+    }
+    .radio-group, .payment-options {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .branch-input, .location-input {
+      margin-top: 20px;
+      display: none;
+      background: #f5f7fa;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .payment-option {
+      width: 120px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      transition: 0.3s;
+    }
+    .payment-option.selected {
+      border-color: #1E90FF;
+      background: #e3f2fd;
+    }
+    .payment-option img {
+      width: 50px;
+      filter: hue-rotate(180deg);
+    }
+    .confirmation {
+      text-align: center;
+      font-size: 18px;
+      color: #27ae60;
+      margin-top: 20px;
+    }
+    button {
+      margin-top: 30px;
+      padding: 15px;
+      width: 100%;
+      background: #1E90FF;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #187bcd; }
+    .step { display: none; }
+    .step.active { display: block; }
+    .Back {
+      background: #1E90FF;
+      color: white;
+      font-size: 18px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Step 1 -->
+  <div class="step active" id="step1">
+    <h2>اختر طريقة استلام السيارة</h2>
+    <div class="radio-group">
+      <label><input type="radio" name="delivery" value="من الفرع" checked onclick="toggleLocation()"> من الفرع</label>
+      <label><input type="radio" name="delivery" value="توصيل إلى الموقع" onclick="toggleLocation()"> توصيل إلى الموقع</label>
+    </div>
+    <div class="branch-input" id="branchInput">
+      <label>اختر الفرع</label>
+      <select id="branchSelect">
+        <option>مخرج 33 - شارع نجد - ظهره لبن</option>
+        <option>حي النسيم - طريق خريص الفرعي</option>
+        <option>حي النفل - الدائري الشمالي</option>
+      </select>
+    </div>
+    <div class="location-input" id="locationInput">
+      <label>اختر المدينة</label>
+      <select id="city"><option>الرياض</option></select>
+      <label>الحي</label><input type="text" id="neighborhood" placeholder="مثال: حي الملك فهد">
+      <label>الشارع</label><input type="text" id="street" placeholder="مثال: شارع العليا">
+      <label>رقم المبنى</label><input type="text" id="buildingNumber" placeholder="مثال: 12">
+    </div>
+    <button onclick="goToStep(2)">التالي</button>
+  </div>
+  <!-- Step 2 -->
+  <div class="step" id="step2">
+    <h2>اختر وسيلة الدفع</h2>
+    <div class="payment-options">
+      <div class="payment-option" onclick="selectPayment(this, 'بطاقة بنكية')">
+        <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png"><div>بطاقة</div>
+      </div>
+      <div class="payment-option" onclick="selectPayment(this, 'Apple Pay')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"><div>Apple Pay</div>
+      </div>
+    </div>
+    <div id="cardInfo" style="display:none;">
+      <label>الاسم على البطاقة</label><input type="text" id="cardName" placeholder="مثال: أحمد بن خالد">
+      <label>رقم البطاقة</label><input type="text" id="cardNumber" placeholder="**** **** **** ****">
+    </div>
+    <button onclick="goToStep(3)">تأكيد الطلب</button>
+  </div>
+  <!-- Step 3 -->
+  <div class="step" id="step3">
+    <h2>✅ تم تأكيد الطلب!</h2>
+    <div class="confirmation" id="confirmationMessage"></div>
+    <a href="Main_Page.html"> <button class="Back">العودة للصفحة الرئيسية</button></a>
+  </div>
+</div>
+<script>
+  let selectedPayment = '';
+  function toggleLocation() {
+    const delivery = document.querySelector('input[name="delivery"]:checked').value;
+    document.getElementById('locationInput').style.display = delivery === 'توصيل إلى الموقع' ? 'block' : 'none';
+    document.getElementById('branchInput').style.display = delivery === 'من الفرع' ? 'block' : 'none';
+  }
+  function goToStep(step) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(`step${step}`).classList.add('active');
+    if (step === 3) {
+      if (!selectedPayment) return alert("الرجاء اختيار وسيلة الدفع");
+      if (selectedPayment === 'بطاقة بنكية') {
+        const name = document.getElementById("cardName").value;
+        const number = document.getElementById("cardNumber").value;
+        if (!name || !number) return alert("يرجى تعبئة بيانات البطاقة");
+      }
+      const delivery = document.querySelector('input[name="delivery"]:checked').value;
+      const city = document.getElementById("city")?.value;
+      const neighborhood = document.getElementById("neighborhood")?.value;
+      const street = document.getElementById("street")?.value;
+      const building = document.getElementById("buildingNumber")?.value;
+      const branch = document.getElementById("branchSelect")?.value;
+      document.getElementById("confirmationMessage").innerHTML = `
+        ✅ تم تأكيد طلبك بنجاح!<br>
+        طريقة الاستلام: <strong>${delivery}</strong><br>
+        ${delivery === 'من الفرع' ? `الفرع: <strong>${branch}</strong><br>` : ''}
+        ${delivery === 'توصيل إلى الموقع' ? `الموقع: <strong>${city} - ${neighborhood} - ${street} - رقم المبنى: ${building}</strong><br>` : ''}
+        وسيلة الدفع: <strong>${selectedPayment}</strong><br>
+        شكراً لاستخدامك خدمتنا. 🚗
+      `;
+    }
+  }
+  function selectPayment(el, method) {
+    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedPayment = method;
+    document.getElementById("cardInfo").style.display = (method === 'بطاقة بنكية') ? 'block' : 'none';
+  }
+  window.onload = toggleLocation;
+</script>
+</body>
+</html>
